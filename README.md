@@ -5,7 +5,7 @@
 
 
 ## Screenshots
-<img src="screenshots/show.gif" width="330" align="right" hspace="20">
+<img src="screenshots/show.gif" width="330" align="left" hspace="20">
 
 
 ## About App

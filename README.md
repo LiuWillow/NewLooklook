@@ -3,8 +3,17 @@
 ## Screenshots
 <img src="screenshots/show.gif" width="330" align="right" hspace="20">
 
+##About App
+app中使用到的开源库：
+RXJAVA
+RETROFIT2
+GSON
+HTMLTEXTVIEW
+BUTTERKNIFE
+MATERRIA DESIGN
+VARDVIEW
+GLIDE
+DRAGPHOTOVIEW
 
-
-
-##关于我
+##About Me
 一个不务正业自学安卓半年多的大三工科生- - 对安卓开发有着浓厚的兴趣

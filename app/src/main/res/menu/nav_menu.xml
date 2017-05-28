@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/meizi_item"
+        android:title="看看妹子"
+        android:icon="@drawable/nav_item_1"
+        android:checkable="true"
+        />
+    <item
+        android:id="@+id/wangyi_item"
+        android:title="网易头条"
+        android:icon="@drawable/wangyi"
+        app:itemIconTint="#fff"
+        android:checkable="true"
+        />
+</menu>

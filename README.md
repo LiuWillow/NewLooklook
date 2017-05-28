@@ -4,11 +4,11 @@
 
 
 
-# Screenshots
-<img src="screenshots/show.gif" width="330" align="left" hspace="20">
+## Screenshots
+<img src="screenshots/show.gif" width="330"  hspace="20">
 
 
-# About App
+## About App
 app中使用到的开源库：
 RXJAVA
 RETROFIT2
@@ -20,7 +20,7 @@ VARDVIEW
 GLIDE
 DRAGPHOTOVIEW
 
-# About Me
+## About Me
 一个不务正业自学安卓半年多的大三工科生- - 对安卓开发有着浓厚的兴趣
 
 

@@ -15,6 +15,7 @@ import com.example.administrator.newlooklook.adapter.MeiziAdapter;
 import com.example.administrator.newlooklook.bean.Meizi;
 import com.example.administrator.newlooklook.presenter.MeiziPresenterImpl;
 import com.example.administrator.newlooklook.presenter.implView.IMeiziFragment;
+import com.example.administrator.newlooklook.widget.WrapContentLinearLayoutManager;
 
 import java.util.ArrayList;
 
@@ -30,11 +31,13 @@ public class MeiziFragment extends Fragment implements IMeiziFragment{
     RecyclerView recycle;
     @BindView(R.id.progress)
     ProgressBar progress;
+
     private int index=1;
     private MeiziAdapter adapter;
-    private LinearLayoutManager linearLayoutManager;
+    private WrapContentLinearLayoutManager linearLayoutManager;
     private RecyclerView.OnScrollListener onScrollListener;
     private MeiziPresenterImpl mMeiziPresenter;
+    private boolean isLoading;
 
     @Nullable
     @Override
@@ -47,12 +50,12 @@ public class MeiziFragment extends Fragment implements IMeiziFragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mMeiziPresenter=new MeiziPresenterImpl(this);
-        linearLayoutManager=new LinearLayoutManager(getContext());
+        linearLayoutManager=new WrapContentLinearLayoutManager(getContext());
         recycle.setLayoutManager(linearLayoutManager);
         adapter=new MeiziAdapter(getContext());
         recycle.setAdapter(adapter);
         initListener();
-        mMeiziPresenter.getMeiziData(index);
+        loadDate();
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -68,6 +71,8 @@ public class MeiziFragment extends Fragment implements IMeiziFragment{
 
     @Override
     public void updateMeiziData(ArrayList<Meizi> meizis) {
+        adapter.loadingfinish();
+        isLoading = false;
         adapter.addItems(meizis);
     }
 
@@ -87,9 +92,10 @@ public class MeiziFragment extends Fragment implements IMeiziFragment{
                     int pastVisiblesItems=linearLayoutManager.findFirstVisibleItemPosition();
                     int totalItemCount=linearLayoutManager.getItemCount();
                     int visibleItemCount=linearLayoutManager.getChildCount();
-                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                    if (!isLoading && (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        isLoading = true;
                         index += 1;
-                        mMeiziPresenter.getMeiziData(index);
+                        loadMoreDate();
                     }
                 }
             }
@@ -99,5 +105,17 @@ public class MeiziFragment extends Fragment implements IMeiziFragment{
 
     }
 
+    private void loadDate() {
+        if (adapter.getItemCount() > 0) {
+            adapter.clearData();
+        }
+        mMeiziPresenter.getMeiziData(index);
+
+    }
+
+    private void loadMoreDate() {
+        adapter.loadingStart();
+        mMeiziPresenter.getMeiziData(index);
+    }
 
 }

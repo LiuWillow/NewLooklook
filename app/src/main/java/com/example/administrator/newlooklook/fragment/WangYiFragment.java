@@ -15,6 +15,7 @@ import com.example.administrator.newlooklook.adapter.WangyiAdapter;
 import com.example.administrator.newlooklook.bean.NewsBean;
 import com.example.administrator.newlooklook.presenter.WangyiPresenterImpl;
 import com.example.administrator.newlooklook.presenter.implView.IWangyiFragment;
+import com.example.administrator.newlooklook.widget.WrapContentLinearLayoutManager;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,6 @@ import butterknife.ButterKnife;
  */
 
 public class WangYiFragment extends Fragment implements IWangyiFragment{
-    //TODO 网易Fragment
     @BindView(R.id.recycle_wangyi)
     RecyclerView recyclerView;
     @BindView(R.id.progress)
@@ -35,7 +35,9 @@ public class WangYiFragment extends Fragment implements IWangyiFragment{
     private WangyiAdapter adapter;
     private RecyclerView.OnScrollListener onScrollListener;
     private WangyiPresenterImpl wangyiPresenter;
-    private LinearLayoutManager linearLayoutManager;
+    private WrapContentLinearLayoutManager linearLayoutManager;
+    private boolean isLoading;
+    private int index = 0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,15 +55,34 @@ public class WangYiFragment extends Fragment implements IWangyiFragment{
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                //TODO 设置滚动监听器
+                int pastVisiblesItems=linearLayoutManager.findFirstVisibleItemPosition();
+                int totalItemCount=linearLayoutManager.getItemCount();
+                int visibleItemCount=linearLayoutManager.getChildCount();
+                if (!isLoading && (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                    isLoading = true;
+                    index += 20;
+                    loadMoreDate();
+                }
             }
         };
-        linearLayoutManager=new LinearLayoutManager(getContext());
+        linearLayoutManager=new WrapContentLinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        wangyiPresenter.getnews(0);
+        recyclerView.addOnScrollListener(onScrollListener);
+        loadDate();
         super.onViewCreated(view, savedInstanceState);
     }
 
+    private void loadDate() {
+        if (adapter.getItemCount() > 0) {
+            adapter.clearData();
+        }
+        wangyiPresenter.getnews(index);
+
+    }
+    private void loadMoreDate() {
+        adapter.loadingStart();
+        wangyiPresenter.getnews(index);
+    }
     @Override
     public void showProgressDialog() {
         progressBar.setVisibility(View.VISIBLE);
@@ -74,6 +95,8 @@ public class WangYiFragment extends Fragment implements IWangyiFragment{
 
     @Override
     public void updatenews(ArrayList<NewsBean> arrayList) {
+        adapter.loadingfinish();
+        isLoading = false;
         adapter.addItems(arrayList);
     }
 }

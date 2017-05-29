@@ -5,7 +5,7 @@
 
 
 ## Screenshots
-<img src="screenshots/show.gif" width="330"  hspace="20">
+<img src="screenshots/gif1.gif" width="330"  hspace="20">
 <img src="screenshots/img1.png" width="330"  hspace="20">
 <img src="screenshots/img2.png" width="330"  hspace="20">
 <img src="screenshots/img3.png" width="330"  hspace="20">

@@ -19,7 +19,7 @@
             android:layout_height="50dp"
             app:titleTextColor="@color/black"
             android:outlineProvider="none"
-
+            app:title="IU"
             />
         <FrameLayout
             android:id="@+id/contanier"

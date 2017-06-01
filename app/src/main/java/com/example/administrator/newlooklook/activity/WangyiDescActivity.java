@@ -27,6 +27,7 @@ import butterknife.ButterKnife;
  */
 
 public class WangyiDescActivity extends AppCompatActivity implements IWangyiDescActivity{
+
     @BindView(R.id.wangyi_desc_image)
     ImageView descImage;
     @BindView(R.id.progress)

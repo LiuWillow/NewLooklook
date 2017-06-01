@@ -1,11 +1,14 @@
 package com.example.administrator.newlooklook;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.administrator.newlooklook.activity.AboutActivity;
 import com.example.administrator.newlooklook.fragment.MeiziFragment;
@@ -67,6 +71,15 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},0);
+        View decorView = getWindow().getDecorView();
+        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|      //全屏
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(option);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);       //设置状态栏透明
+
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
@@ -110,6 +123,9 @@ public class MainActivity extends AppCompatActivity{
     private void goAboutActivity(){
         Intent intent=new Intent(MainActivity.this, AboutActivity.class);
         startActivity(intent);
+    }
+
+    private class PackageManager {
     }
 
   /*  private Fragment findMenuItemByFragment(Fragment fragment){

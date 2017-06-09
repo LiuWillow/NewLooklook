@@ -110,7 +110,6 @@ public class MeiziDescribeActivity extends AppCompatActivity{
             boolean isSuccess = bmp.compress(Bitmap.CompressFormat.JPEG, 60, fos);
             fos.flush();
             fos.close();
-
             //把文件插入到系统图库
       /*     MediaStore.Images.Media.insertImage(context.getContentResolver(), file.getAbsolutePath(), fileName, null);*/
 

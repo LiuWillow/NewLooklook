@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="email:1274218135@qq.com"
+        android:text="email: liuwillow9625@163.com"
         android:textSize="15dp"
         android:textColor="#0ffff0"
         />

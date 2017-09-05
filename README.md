@@ -23,6 +23,5 @@ GLIDE<br>
 DRAGPHOTOVIEW<br>
 
 ## About Me
-一个不务正业自学安卓半年多的大三工科生- - 对安卓开发有着浓厚的兴趣
-
-
+一个不务正业自学JAVA一年多的大四工科生- - 正在朝着后台架构师的方向前进
+邮箱 liuwillow9625@163.com
